@@ -1,2 +1,4 @@
 # Artiflex
-AI powered promotional content generator
+Artiflex: AI-Powered Promotional Banner Generator
+
+
