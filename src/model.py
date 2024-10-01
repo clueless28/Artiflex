@@ -31,8 +31,8 @@ class BannerGenerator:
         ])
         
         self.image_options = {
-                "Upto 60 percent off": os.path.join(config['loader_params']['input_directory'],'text_60_percent_off.png'),
-                "Buy2Get1 Free": os.path.join(config['loader_params']['input_directory'],'text_buy_2_get_1.png') 
+                "Upto 60 percent off": os.path.join(os.getcwd(), config['loader_params']['input_directory'],'text_60_percent_off.png'),
+                "Buy2Get1 Free": os.path.join(os.getcwd(), config['loader_params']['input_directory'],'text_buy_2_get_1.png') 
             }
         
     def model_loader(self, prompt):
@@ -116,7 +116,7 @@ class BannerGenerator:
             PROMPT = self.prompt
 
         padding = 300
-        base_image = Image.open(os.path.join(self.config['loader_params']['input_directory'],'bg.png')).convert("RGBA").resize((self.config['default_params']['BANNER_W'], self.config['default_params']['BANNER_H']))
+        base_image = Image.open(os.path.join(os.getcwd(), self.config['loader_params']['input_directory'],'bg.png')).convert("RGBA").resize((self.config['default_params']['BANNER_W'], self.config['default_params']['BANNER_H']))
     
         object_image = self.image1.convert("RGBA").resize((self.image1.size[0] // 2, self.image1.size[1] // 2))
         text_image_path = self.image_options[self.image2]  # Get the path from the options
