@@ -17,7 +17,6 @@ The application extracts a mask from the product image and applies a preset offe
 4. Multiple products per banner
 
 
-
 ## Features
 
 - **AI-Powered Banner Generation**: Utilize Stable Diffusion's Inpainting model to create high-quality promotional banners.
@@ -27,12 +26,15 @@ The application extracts a mask from the product image and applies a preset offe
 - **Responsive UI**: Built using Gradio with a sleek and intuitive user interface.
 
 ## Table of Contents
-
+- [Architecture]
 - [Installation](#installation)
 - [Usage](#usage)
 - [Configuration](#configuration)
 - [Customization](#customization)
 - [Future Work](#future-work)
+
+## Architecture
+![Google Hackathon - AI drawio](https://github.com/user-attachments/assets/1c4842b0-46b7-4d19-bfd8-36a186743121)
 
 ## Installation
 
