@@ -15,7 +15,9 @@ default_params:
 loader_params:
   input_directory: "assets"
   default_prompts: [
+    "Create a background with high quality single christmas original photo. It should be full HD, clean minimum design. No text should be put.",
     "A soft gradient background blending from light blue to white, with random geometric shapes like squares, circles, and hexagons in lighter shades floating gently across the design",
     "A light beige background with a Christmas wreath made of small grocery icons, like fruits, vegetables, and bread. The wreath is minimal, with red and green accents for a festive feel.",
     "A gradient background shifting from deep red to gold, with a small grocery bag icon in the bottom-right corner. The bag contains Diwali essentials like sweets and dry fruits, surrounded by a minimal rangoli pattern for a festive and elegant design"
     ]
+  
