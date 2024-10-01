@@ -31,15 +31,15 @@ def load_image(selected_image):
 
 # Dropdown options
 image_options = {
-    "Upto 60 percent off": os.path.join(config['loader_params']['input_directory'],'text_60_percent_off.png'),
-    "Buy2Get1 Free": os.path.join(config['loader_params']['input_directory'],'text_buy_2_get_1.png')
+    "Upto 60 percent off": os.path.join(os.getcwd(), config['loader_params']['input_directory'],'text_60_percent_off.png'),
+    "Buy2Get1 Free": os.path.join(os.getcwd(), config['loader_params']['input_directory'],'text_buy_2_get_1.png')
 }
 
 # Gradio interface
 with gr.Blocks(theme=theme) as demo:
     with gr.Row():
         with gr.Column(scale=1):
-            gr.Image(os.path.join(config['loader_params']['input_directory'],'logo.png'), elem_id="logo", label="Logo", show_label=False, height=50, width=50)
+            gr.Image(os.path.join(os.getcwd(), config['loader_params']['input_directory'],'logo.png'), elem_id="logo", label="Logo", show_label=False, height=50, width=50)
         with gr.Column(scale=9):
             gr.Markdown("# Welcome to Artiflex - your AI assistant for promotional content creation")
     
