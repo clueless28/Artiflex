@@ -26,7 +26,7 @@ The application extracts a mask from the product image and applies a preset offe
 - **Responsive UI**: Built using Gradio with a sleek and intuitive user interface.
 
 ## Table of Contents
-- [Architecture]
+- [Architecture](#Architecture)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Configuration](#configuration)
