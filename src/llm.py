@@ -17,8 +17,17 @@ import torch.distributed as dist
 import os
 import logging
 import gc
+from transformers import AutoConfig
 import transformers
 
+
+import torch
+# Create a dummy tensor
+dummy_tensor = torch.tensor([1.0]).cuda()
+
+# Check if NCCL is available
+is_nccl_available = torch.cuda.nccl.is_available(dummy_tensor)
+print(f"NCCL available: {is_nccl_available}")
 # Initialize distributed process group
 dist.init_process_group(backend='nccl')
 os.environ['PYTORCH_CUDA_ALLOC_CONF'] = "expandable_segments:True"
@@ -38,7 +47,7 @@ if tokenizer.pad_token is None:
     tokenizer.pad_token = tokenizer.eos_token  # Use eos_token as pad_token
 
 # Load your CSV file
-csv_file_path = '/home/product_master/Bhumika/Artiflex/christmas_banner_unique_prompts.csv'
+csv_file_path = '/home/drovco/Bhumika/Artiflex/christmas_banner_unique_prompts.csv'
 csv_data = pd.read_csv(csv_file_path)
 
 # Split data into training and testing sets
@@ -131,17 +140,30 @@ def compute_metrics(eval_pred):
     return {'eval_loss': loss}
 
 class SaveModelCallback(transformers.TrainerCallback):
+    def __init__(self, model_name):
+        self.model_name = model_name  # Store model_name for accessing in the callback
+
     def on_epoch_end(self, args, state, control, **kwargs):
-        # Save model weights every 10 epochs
+        tokenizer = kwargs.get('tokenizer', None)
+        if tokenizer is None:
+            logging.error("Tokenizer is not available in the callback.")
+            return
+
         if state.epoch % 10 == 0 and state.epoch > 0:
             output_dir = f"./results/checkpoint-epoch-{int(state.epoch)}"
             kwargs['model'].save_pretrained(output_dir)
-            kwargs['tokenizer'].save_pretrained(output_dir)
+            tokenizer.save_pretrained(output_dir)
+
+            # Save model configuration manually
+            model_config = AutoConfig.from_pretrained(self.model_name)
+            model_config.save_pretrained(output_dir)
+
             logging.info(f"Model checkpoint saved at {output_dir}")
-        torch.cuda.empty_cache()
-        gc.collect()
-
-
+            # Check if config.json exists after saving
+            if os.path.exists(os.path.join(output_dir, 'config.json')):
+                logging.info(f"Config file saved successfully at {output_dir}/config.json")
+            else:
+                logging.warning(f"Config file NOT found after saving at {output_dir}")
 
 # Function to move model to CPU for evaluation
 def move_model_to_cpu(trainer):
@@ -157,10 +179,11 @@ trainer = Trainer(
     args=training_args,
     train_dataset=train_dataset,      
     eval_dataset=test_dataset,        
-    compute_metrics=compute_metrics,  
-    callbacks=[CustomCallback(), SaveModelCallback()],    
+    compute_metrics=compute_metrics, 
+    tokenizer=tokenizer , 
+    callbacks=[CustomCallback(), SaveModelCallback(model_name="meta-llama/Llama-3.2-3B")],    
 )
-
+trainer.tokenizer = tokenizer
 # Start training on the GPU
 trainer.model.to(local_rank)
 trainer.train()
