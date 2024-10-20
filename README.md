@@ -33,9 +33,6 @@ The application extracts a mask from the product image and applies a preset offe
 - [Customization](#customization)
 - [Future Work](#future-work)
 
-## Architecture
-![Google Hackathon - AI drawio](https://github.com/user-attachments/assets/1c4842b0-46b7-4d19-bfd8-36a186743121)
-
 ## Installation
 
 ### 1. Clone the Repository
