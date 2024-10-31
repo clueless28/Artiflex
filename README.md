@@ -15,6 +15,7 @@ The application extracts a mask from the product image and applies a preset offe
 2. Refined prompt
 3. Conditioned generative AI
 4. Multiple products per banner
+![Uploading Orange and Beige Ganesh Chaturthi Sale Banner-2.png…]()
 
 
 ## Features
