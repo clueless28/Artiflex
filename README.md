@@ -5,7 +5,7 @@ Welcome to **Artiflex**, an AI assistant designed to help you create promotional
 ### Current Solution
 In the current workflow (MVP at the time of submission), the system takes in three inputs:  
 1. **Prompt (text)**  
-2. **Product image**  
+2. **Product image**     
 3. **Offer selection (preset list)**  
 
 The application extracts a mask from the product image and applies a preset offer font image according to the selection. These elements are placed within a preset layout. This layout is then provided as input to a **stable diffusion model**, which designs the banner according to user inputs such as theme, gradient, and overall look.
