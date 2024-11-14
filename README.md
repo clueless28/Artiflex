@@ -59,7 +59,7 @@ pip install -r requirements.txt
 ### 4. Usage
 To run the application, execute the following command in your terminal:
 ```
-python src/deploy.py
+python src/deploy.py 
 nohup python3 -m torch.distributed.launch --nproc_per_node=2 --nnodes=1 src/llm.py > output.log 2>&1 &
 ``
 
